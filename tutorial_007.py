@@ -1,3 +1,5 @@
+#これは各要素を変化せせたコードです
+
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
@@ -46,7 +48,7 @@ class NeuralNetwork(nn.Module):
 model = NeuralNetwork().to(device)
 print(model)
 loss_fn = nn.CrossEntropyLoss()
-optimizer = torch.optim.SGD(model.parameters(), lr=5e-3)
+optimizer = torch.optim.Adam(model.parameters(), lr=5e-3)
 def train(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
     model.train()

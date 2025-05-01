@@ -3,6 +3,30 @@ from torch import nn
 from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision.transforms import ToTensor
+from torchvision.transforms import Compose, ToTensor, Normalize, RandomHorizontalFlip, RandomRotation
+
+
+train_transform = Compose([
+    RandomHorizontalFlip(p=0.5),
+    RandomRotation(10),
+    ToTensor(),
+    Normalize((0.5,), (0.5,))
+])
+
+
+test_transform = Compose([
+    ToTensor(),
+    Normalize((0.5,), (0.5,))
+])
+
+
+training_data = datasets.FashionMNIST(
+    root="data", train=True, download=True, transform=train_transform
+)
+test_data = datasets.FashionMNIST(
+    root="data", train=False, download=True, transform=test_transform
+)
+
 
 training_data = datasets.FashionMNIST(
     root="data", train=True, download=True, transform=ToTensor()
